@@ -223,29 +223,19 @@
   <div class="wrap contact-grid">
     <div>
       <h2>Erstgespräch vereinbaren</h2>
-      <p class="lead">Schreiben Sie kurz, worum es geht: neue Website, Relaunch oder ein Ablauf, der zu viel Zeit kostet. Sie hören innerhalb von zwei Werktagen von uns.</p>
-      <div class="contact-details">
-        <a href="mailto:kontakt@nebraxa.de">kontakt@nebraxa.de</a>
-        <span>Kaufering, Bayern</span>
-      </div>
+      <p class="lead">Sagen Sie kurz, worum es geht: neue Website, Relaunch oder ein Ablauf, der zu viel Zeit kostet. Das Gespräch kostet nichts und dauert etwa eine halbe Stunde.</p>
+      <p class="lead">Am schnellsten geht ein Anruf. Wenn niemand rangeht, sprechen Sie auf die Mailbox – wir rufen am selben Tag zurück. Auf E-Mails antworten wir innerhalb von zwei Werktagen.</p>
     </div>
-    <form id="contact-form" action="https://formspree.io/f/xoeqgkne" method="POST">
-      <div class="field">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" placeholder="Ihr Name" required>
-      </div>
-      <div class="field">
-        <label for="email">E-Mail</label>
-        <input id="email" name="email" type="email" placeholder="ihre@firma.de" required>
-      </div>
-      <div class="field">
-        <label for="msg">Worum geht es?</label>
-        <textarea id="msg" name="message" placeholder="Zum Beispiel: 'Unsere Website ist zehn Jahre alt und auf dem Handy unlesbar.' oder 'Wir tippen jede Bestellung von Hand in die Warenwirtschaft.'"></textarea>
-      </div>
-      <button type="submit" class="form-submit">Anfrage senden</button>
-      <div class="form-note"></div>
-      <p class="form-privacy">Ihre Angaben nutzen wir nur zur Beantwortung Ihrer Anfrage. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-    </form>
+    <div class="contact-card">
+      <a class="contact-line" href="tel:+4917687923201">
+        <span class="contact-label">Anrufen</span>
+        <span class="contact-value">+49 176 87923201</span>
+      </a>
+      <a class="contact-line" href="mailto:kontakt@nebraxa.de">
+        <span class="contact-label">Schreiben</span>
+        <span class="contact-value">kontakt@nebraxa.de</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -255,34 +245,6 @@
     <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
   </div>
 </footer>
-
-<script>
-  const contactForm = document.getElementById('contact-form');
-  contactForm.addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const note = contactForm.querySelector('.form-note');
-    const submitBtn = contactForm.querySelector('.form-submit');
-    submitBtn.disabled = true;
-    note.textContent = 'Wird gesendet …';
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        note.textContent = 'Danke! Ihre Anfrage ist angekommen — wir melden uns innerhalb von zwei Werktagen.';
-        contactForm.reset();
-      } else {
-        note.textContent = 'Das Senden hat nicht geklappt. Schreiben Sie uns bitte direkt an kontakt@nebraxa.de.';
-      }
-    } catch (err) {
-      note.textContent = 'Das Senden hat nicht geklappt. Schreiben Sie uns bitte direkt an kontakt@nebraxa.de.';
-    } finally {
-      submitBtn.disabled = false;
-    }
-  });
-</script>
 
 </body>
 </html>
