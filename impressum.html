@@ -4,23 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impressum – Nebraxa</title>
-<meta name="description" content="Impressum und Anbieterkennzeichnung von Nebraxa, Kaufering.">
+<meta name="description" content="Impressum und Anbieterkennzeichnung von Nebraxa.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nebraxa.de/impressum.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/bricolage-grotesque-latin-4efd1a.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/figtree-latin-7073ac.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
+
 <header>
   <div class="nav">
     <a href="index.html" class="logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="2.5" y="4" width="19" height="16" rx="3" stroke="#12464F" stroke-width="1.6"/>
-        <path d="M2.5 8.5h19" stroke="#12464F" stroke-width="1.6"/>
-        <circle cx="6" cy="6.25" r="0.9" fill="#FFC63B"/>
-        <path d="M8.5 16.5l2.6-3.6 2.2 2.2 2.4-3.4" stroke="#FFC63B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M7 25V7l18 18V7" stroke="#12464F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="7" cy="25" r="2.8" fill="#12464F"/>
+        <circle cx="7" cy="7" r="2.8" fill="#12464F"/>
+        <circle cx="25" cy="25" r="2.8" fill="#12464F"/>
+        <circle cx="25" cy="7" r="3.4" fill="#FFC63B"/>
       </svg>
       Nebraxa
     </a>
@@ -29,11 +33,27 @@
       <a href="index.html#preise">Was es kostet</a>
       <a href="index.html#ablauf">Ablauf</a>
       <a href="index.html#warum">Über uns</a>
+      <a href="index.html#fragen">Fragen</a>
     </nav>
     <a href="index.html#kontakt" class="nav-cta">Erstgespräch</a>
+    <details class="nav-menu">
+      <summary aria-label="Menü öffnen">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="#12464F" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </summary>
+      <nav class="nav-menu-panel">
+        <a href="index.html#leistungen">Leistungen</a>
+        <a href="index.html#preise">Was es kostet</a>
+        <a href="index.html#ablauf">Ablauf</a>
+        <a href="index.html#warum">Über uns</a>
+        <a href="index.html#fragen">Fragen</a>
+      </nav>
+    </details>
   </div>
 </header>
 
+<main id="inhalt">
 <section class="legal">
   <div class="wrap">
     <h1>Impressum</h1>
@@ -82,10 +102,11 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap footer-row">
-    <span>© 2026 Nebraxa · Kaufering</span>
+    <span>© 2026 Nebraxa</span>
     <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
   </div>
 </footer>

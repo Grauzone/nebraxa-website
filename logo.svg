@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Nebraxa">
+  <path d="M7 25V7l18 18V7" stroke="#12464F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="7" cy="25" r="2.8" fill="#12464F"/>
+  <circle cx="7" cy="7" r="2.8" fill="#12464F"/>
+  <circle cx="25" cy="25" r="2.8" fill="#12464F"/>
+  <circle cx="25" cy="7" r="3.4" fill="#FFC63B"/>
+</svg>
