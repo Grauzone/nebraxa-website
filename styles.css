@@ -328,17 +328,22 @@ header{
 .doors{
   display:grid;
   grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
 }
 .door{
   display:block;
-  padding:clamp(40px,5vw,64px) clamp(28px,4vw,52px);
+  padding:clamp(36px,4.5vw,58px) 0;
   border-top:3px solid var(--petrol);
-  transition:background .2s ease;
+  border-bottom:1px solid var(--line);
 }
-.door + .door{border-left:1px solid var(--line);}
-.door:hover{background:var(--mist-soft);}
+/* Innenabstand nur zwischen den beiden Tueren, damit der Text
+   buendig mit der uebrigen Mittelspalte beginnt. */
+.door:first-child{padding-right:clamp(26px,3.5vw,48px);}
+.door + .door{
+  border-left:1px solid var(--line);
+  padding-left:clamp(26px,3.5vw,48px);
+}
+.door:hover .door-name{color:var(--ink);}
+.door:hover .door-go{border-bottom-color:var(--petrol);}
 .door-name{
   display:block;
   font-family:'Bricolage Grotesque', sans-serif;
@@ -365,10 +370,11 @@ header{
 }
 
 /* ---------- Abschnitte mit Schiene ---------- */
-/* Faengt das seitliche Einfliegen der Zeilen ab. Bewusst auf
-   .rail-body statt auf .block: .rail-head ist ein Geschwister,
-   kein Nachfahre, und bleibt damit sicher klebend. */
-.rail-body, .doors, .dark{overflow-x:clip;}
+/* Faengt das seitliche Einfliegen ab. Auf Abschnittsebene, nicht
+   auf der Textspalte - sonst werden von links einfliegende Elemente
+   an der Spaltenkante abgeschnitten statt von ausserhalb
+   hereinzukommen. clip erzeugt keinen Scroll-Container. */
+.block, .doors-band, .dark, .closing{overflow-x:clip;}
 .block{padding-block:var(--pad);}
 .block--tint{background:var(--mist-soft);}
 
@@ -462,8 +468,6 @@ header{
   stroke:var(--mist);
   stroke-width:2;
   stroke-dasharray:840;
-  stroke-dashoffset:840;
-  animation:flow-draw 1.5s 0.35s cubic-bezier(.4,0,.2,1) forwards;
 }
 @keyframes flow-draw{to{stroke-dashoffset:0;}}
 
@@ -721,7 +725,8 @@ a:focus-visible, summary:focus-visible{
   .rail-head{position:static;}
   .rail-note{max-width:60ch;}
   .doors{grid-template-columns:1fr;}
-  .door + .door{border-left:none;}
+  .door:first-child{padding-right:0;}
+  .door + .door{border-left:none;padding-left:0;border-top:3px solid var(--petrol);}
   .rows .row{grid-template-columns:1fr;gap:8px;}
   .steps{grid-template-columns:1fr;gap:22px;}
   .step-no{font-size:2rem;margin-bottom:10px;}
@@ -743,37 +748,22 @@ a:focus-visible, summary:focus-visible{
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   *{transition:none !important;animation:none !important;}
-  .flow-rail--draw{stroke-dashoffset:0;}
 }
 
-/* ---------- Aufbau beim Laden und beim Scrollen ----------
-   Der verborgene Zustand steht ausschliesslich in den Keyframes.
-   Ohne Animation - kein Browser-Support, reduzierte Bewegung -
-   bleibt jedes Element sichtbar. */
+/* ---------- Aufbau beim Laden und beim ersten Runterscrollen ----------
+   Der verborgene Zustand haengt an html.js-reveal. Diese Klasse setzt
+   das Skript im head, also vor dem ersten Zeichnen, und nur wenn
+   IntersectionObserver vorhanden ist und keine reduzierte Bewegung
+   gewuenscht wird. Ohne Skript, ohne Observer oder bei reduzierter
+   Bewegung bleibt jedes Element sichtbar.
+   Einmal ausgeloest bleibt .is-in stehen - beim Hochscrollen und bei
+   jedem weiteren Durchgang passiert nichts mehr. */
 
 @keyframes rise-in{
   from{opacity:0;transform:translateY(56px);}
   to{opacity:1;transform:none;}
 }
-@keyframes from-left{
-  from{opacity:0;transform:translateX(-72px);}
-  to{opacity:1;transform:none;}
-}
-@keyframes from-right{
-  from{opacity:0;transform:translateX(72px);}
-  to{opacity:1;transform:none;}
-}
-@keyframes rise-stop{
-  from{opacity:0;transform:scale(0.72);}
-  to{opacity:1;transform:scale(1);}
-}
-@keyframes grow-down{
-  from{transform:scaleY(0);}
-  to{transform:scaleY(1);}
-}
 
-/* fill-box haelt den Ursprung pro Station, sonst skaliert das
-   ganze SVG aus seinem Koordinatenursprung heraus. */
 .flow-stop{transform-box:fill-box;transform-origin:center;}
 
 /* Startsequenz oben auf der Seite */
@@ -793,99 +783,76 @@ a:focus-visible, summary:focus-visible{
   .proof li:nth-child(4){animation-delay:0.86s;}
 }
 
-@supports (animation-timeline: view()){
-  @media (prefers-reduced-motion: no-preference){
+/* Ausgangszustand. Die Liste ist identisch mit der im Skript. */
+html.js-reveal :is(.door, .rail-head > *, .rail-body > .lead, .tags li,
+  .lane-name, .rows dt, .rows dd, .dark-head, .dark-lead, .flow,
+  .dark-rows .row, .wide-head, .steps li, .faq details, .closing h2,
+  .closing .lead, .reach a){
+  opacity:0;
+  transform:translateY(56px);
+  transition:opacity 0.85s cubic-bezier(.16,.68,.3,1),
+             transform 0.85s cubic-bezier(.16,.68,.3,1);
+}
+html.js-reveal :is(.door, .rail-head > *, .rail-body > .lead, .tags li,
+  .lane-name, .rows dt, .rows dd, .dark-head, .dark-lead, .flow,
+  .dark-rows .row, .wide-head, .steps li, .faq details, .closing h2,
+  .closing .lead, .reach a).is-in{
+  opacity:1;
+  transform:none;
+}
 
-    .door,
-    .rail-head > *,
-    .rail-body > .lead,
-    .tags li,
-    .lane-name,
-    .rows dt,
-    .rows dd,
-    .dark-head,
-    .dark-lead,
-    .flow,
-    .dark-rows .row,
-    .wide-head,
-    .steps li,
-    .faq details,
-    .closing h2,
-    .closing .lead,
-    .reach a{
-      animation-name:rise-in;
-      animation-duration:auto;
-      animation-delay:0s;
-      animation-timing-function:cubic-bezier(.16,.68,.3,1);
-      animation-fill-mode:both;
-      animation-timeline:view();
-      animation-range:entry 10% cover 50%;
-    }
+/* Zweispaltiges setzt sich aus beiden Richtungen zusammen.
+   Die :is()-Huelle haelt die Spezifitaet auf Hoehe der Grundregel. */
+html.js-reveal :is(.rows dt, .dark-rows .row:nth-child(odd),
+  .doors .door:first-child, .tags li){transform:translateX(-150px);}
 
-    /* Zweispaltiges setzt sich aus beiden Richtungen zusammen */
-    .rows dt,
-    .dark-rows .row:nth-child(odd),
-    .doors .door:first-child{animation-name:from-left;}
+html.js-reveal :is(.rows dd, .dark-rows .row:nth-child(even),
+  .doors .door:last-child){transform:translateX(150px);}
 
-    .rows dd,
-    .dark-rows .row:nth-child(even),
-    .doors .door:last-child{animation-name:from-right;}
+html.js-reveal :is(.rows dt, .rows dd, .dark-rows .row,
+  .doors .door, .tags li).is-in{transform:none;}
 
-    /* Die Beschreibung trifft etwas spaeter ein als der Begriff */
-    .rows dd{animation-range:entry 16% cover 56%;}
-    .dark-rows .row:nth-child(even){animation-range:entry 16% cover 56%;}
-    .doors .door:last-child{animation-range:entry 16% cover 56%;}
+/* Die Beschreibung trifft nach dem Begriff ein */
+html.js-reveal :is(.rows dd, .dark-rows .row:nth-child(even),
+  .doors .door:last-child).is-in{transition-delay:0.14s;}
 
-    /* Nebeneinanderliegendes laeuft nacheinander ein */
-    .steps li:nth-child(1){animation-range:entry 10% cover 46%;}
-    .steps li:nth-child(2){animation-range:entry 18% cover 54%;}
-    .steps li:nth-child(3){animation-range:entry 26% cover 62%;}
-    .steps li:nth-child(4){animation-range:entry 34% cover 70%;}
+/* Nebeneinanderliegendes laeuft nacheinander ein */
+html.js-reveal :is(.steps li:nth-child(2)).is-in{transition-delay:0.12s;}
+html.js-reveal :is(.steps li:nth-child(3)).is-in{transition-delay:0.24s;}
+html.js-reveal :is(.steps li:nth-child(4)).is-in{transition-delay:0.36s;}
 
-    .tags li{animation-name:from-left;}
-    .tags li:nth-child(1){animation-range:entry 10% cover 40%;}
-    .tags li:nth-child(2){animation-range:entry 14% cover 44%;}
-    .tags li:nth-child(3){animation-range:entry 18% cover 48%;}
-    .tags li:nth-child(4){animation-range:entry 22% cover 52%;}
-    .tags li:nth-child(5){animation-range:entry 26% cover 56%;}
-    .tags li:nth-child(6){animation-range:entry 30% cover 60%;}
-    .tags li:nth-child(7){animation-range:entry 34% cover 64%;}
+html.js-reveal :is(.tags li){transition-duration:0.6s;}
+html.js-reveal :is(.tags li:nth-child(2)).is-in{transition-delay:0.05s;}
+html.js-reveal :is(.tags li:nth-child(3)).is-in{transition-delay:0.10s;}
+html.js-reveal :is(.tags li:nth-child(4)).is-in{transition-delay:0.15s;}
+html.js-reveal :is(.tags li:nth-child(5)).is-in{transition-delay:0.20s;}
+html.js-reveal :is(.tags li:nth-child(6)).is-in{transition-delay:0.25s;}
+html.js-reveal :is(.tags li:nth-child(7)).is-in{transition-delay:0.30s;}
 
-    .reach a:nth-child(2){animation-range:entry 18% cover 58%;}
+html.js-reveal :is(.reach a:nth-child(2)).is-in{transition-delay:0.14s;}
 
-    /* Schaltbild: Linie laeuft durch, Stationen setzen sich danach */
-    .flow{view-timeline-name:--flowline;}
-    .flow-rail--draw,
-    .flow-stop{
-      animation-duration:auto;
-      animation-delay:0s;
-      animation-timing-function:linear;
-      animation-fill-mode:both;
-      animation-timeline:--flowline;
-    }
-    .flow-rail--draw{
-      animation-name:flow-draw;
-      animation-range:entry 14% cover 62%;
-    }
-    .flow-stop{
-      animation-name:rise-stop;
-      animation-timing-function:cubic-bezier(.16,.68,.3,1);
-    }
-    .flow-stop:nth-of-type(1){animation-range:entry 20% cover 34%;}
-    .flow-stop:nth-of-type(2){animation-range:entry 30% cover 44%;}
-    .flow-stop:nth-of-type(3){animation-range:entry 40% cover 54%;}
-    .flow-stop:nth-of-type(4){animation-range:entry 50% cover 64%;}
+/* Schaltbild: Linie laeuft durch, Stationen setzen sich dahinter */
+html.js-reveal .flow-rail--draw{
+  stroke-dashoffset:840;
+  transition:stroke-dashoffset 1.7s cubic-bezier(.36,0,.2,1) 0.1s;
+}
+html.js-reveal .flow.is-in .flow-rail--draw{stroke-dashoffset:0;}
 
-    /* Einspaltig ergibt seitliches Einfliegen keinen Sinn mehr */
-    @media (max-width: 860px){
-      .rows dt,
-      .rows dd,
-      .tags li,
-      .dark-rows .row,
-      .doors .door{
-        animation-name:rise-in;
-        animation-range:entry 10% cover 50%;
-      }
-    }
-  }
+html.js-reveal .flow-stop{
+  opacity:0;
+  transform:scale(0.7);
+  transition:opacity 0.5s ease-out, transform 0.5s cubic-bezier(.2,.9,.3,1.25);
+}
+html.js-reveal .flow.is-in .flow-stop{opacity:1;transform:none;}
+html.js-reveal .flow.is-in .flow-stop:nth-of-type(1){transition-delay:0.30s;}
+html.js-reveal .flow.is-in .flow-stop:nth-of-type(2){transition-delay:0.62s;}
+html.js-reveal .flow.is-in .flow-stop:nth-of-type(3){transition-delay:0.94s;}
+html.js-reveal .flow.is-in .flow-stop:nth-of-type(4){transition-delay:1.26s;}
+
+/* Einspaltig ergibt seitliches Einfliegen keinen Sinn mehr */
+@media (max-width: 860px){
+  html.js-reveal :is(.rows dt, .rows dd, .tags li, .dark-rows .row,
+    .doors .door){transform:translateY(44px);}
+  html.js-reveal :is(.rows dt, .rows dd, .tags li, .dark-rows .row,
+    .doors .door).is-in{transform:none;}
 }

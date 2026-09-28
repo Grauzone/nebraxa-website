@@ -20,6 +20,54 @@
 <link rel="preload" href="fonts/figtree-latin-7073ac.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 
+<script>
+/* Blendet Abschnitte beim ersten Runterscrollen ein. Jedes Element wird
+   nach dem Ausloesen abgemeldet, beim Hochscrollen passiert also nichts
+   mehr. Die Klasse js-reveal wird hier im head gesetzt, damit nichts
+   kurz sichtbar aufblitzt, und bei jedem Fehler wieder entfernt - dann
+   ist die Seite ohne Effekte, aber vollstaendig sichtbar. */
+(function () {
+  var REVEAL = '.door, .rail-head > *, .rail-body > .lead, .tags li,'
+    + ' .lane-name, .rows dt, .rows dd, .dark-head, .dark-lead, .flow,'
+    + ' .dark-rows .row, .wide-head, .steps li, .faq details, .closing h2,'
+    + ' .closing .lead, .reach a';
+
+  var root = document.documentElement;
+  if (!('IntersectionObserver' in window)) { return; }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+  root.classList.add('js-reveal');
+
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var revealed = 0;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) { return; }
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
+          revealed++;
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll(REVEAL).forEach(function (el) {
+        observer.observe(el);
+      });
+
+      /* Sicherheitsnetz: was im Blickfeld liegt, muss sofort ausloesen.
+         Ist nach drei Sekunden nichts passiert, arbeitet der Observer
+         nicht - dann lieber ohne Effekt als mit unsichtbarem Inhalt. */
+      window.setTimeout(function () {
+        if (revealed === 0) { root.classList.remove('js-reveal'); }
+      }, 3000);
+    } catch (e) {
+      root.classList.remove('js-reveal');
+    }
+  });
+})();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -107,17 +155,19 @@
   </div>
 </section>
 
-<section class="doors" aria-label="Die zwei Bereiche">
-  <a href="#web" class="door">
-    <span class="door-name">Webentwicklung</span>
-    <span class="door-text">Website, Relaunch oder Kundenportal: schnell, auf dem Handy lesbar, bei Google auffindbar – und von Ihnen selbst pflegbar.</span>
-    <span class="door-go">Ansehen</span>
-  </a>
-  <a href="#automatisierung" class="door">
-    <span class="door-name">KI-Automatisierung</span>
-    <span class="door-text">Anfragen sortieren, Rechnungen erfassen, Termine koordinieren: wiederkehrende Handgriffe laufen ohne Sie weiter.</span>
-    <span class="door-go">Ansehen</span>
-  </a>
+<section class="doors-band" aria-label="Die zwei Bereiche">
+  <div class="shell doors">
+    <a href="#web" class="door">
+      <span class="door-name">Webentwicklung</span>
+      <span class="door-text">Website, Relaunch oder Kundenportal: schnell, auf dem Handy lesbar, bei Google auffindbar – und von Ihnen selbst pflegbar.</span>
+      <span class="door-go">Ansehen</span>
+    </a>
+    <a href="#automatisierung" class="door">
+      <span class="door-name">KI-Automatisierung</span>
+      <span class="door-text">Anfragen sortieren, Rechnungen erfassen, Termine koordinieren: wiederkehrende Handgriffe laufen ohne Sie weiter.</span>
+      <span class="door-go">Ansehen</span>
+    </a>
+  </div>
 </section>
 
 <section class="block">
