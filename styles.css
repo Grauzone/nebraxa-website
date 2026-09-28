@@ -365,6 +365,10 @@ header{
 }
 
 /* ---------- Abschnitte mit Schiene ---------- */
+/* Faengt das seitliche Einfliegen der Zeilen ab. Bewusst auf
+   .rail-body statt auf .block: .rail-head ist ein Geschwister,
+   kein Nachfahre, und bleibt damit sicher klebend. */
+.rail-body, .doors, .dark{overflow-x:clip;}
 .block{padding-block:var(--pad);}
 .block--tint{background:var(--mist-soft);}
 
@@ -748,21 +752,31 @@ a:focus-visible, summary:focus-visible{
    bleibt jedes Element sichtbar. */
 
 @keyframes rise-in{
-  from{opacity:0;transform:translateY(52px);}
+  from{opacity:0;transform:translateY(56px);}
   to{opacity:1;transform:none;}
 }
-@keyframes fade-in{
-  from{opacity:0;}
-  to{opacity:1;}
+@keyframes from-left{
+  from{opacity:0;transform:translateX(-72px);}
+  to{opacity:1;transform:none;}
 }
-/* fill-box haelt den Ursprung pro Station, sonst skaliert das
-   ganze SVG aus seinem Koordinatenursprung heraus. */
-.flow-stop{transform-box:fill-box;transform-origin:center;}
+@keyframes from-right{
+  from{opacity:0;transform:translateX(72px);}
+  to{opacity:1;transform:none;}
+}
 @keyframes rise-stop{
   from{opacity:0;transform:scale(0.72);}
   to{opacity:1;transform:scale(1);}
 }
+@keyframes grow-down{
+  from{transform:scaleY(0);}
+  to{transform:scaleY(1);}
+}
 
+/* fill-box haelt den Ursprung pro Station, sonst skaliert das
+   ganze SVG aus seinem Koordinatenursprung heraus. */
+.flow-stop{transform-box:fill-box;transform-origin:center;}
+
+/* Startsequenz oben auf der Seite */
 @media (prefers-reduced-motion: no-preference){
   .opening h1,
   .opening-lead,
@@ -781,12 +795,14 @@ a:focus-visible, summary:focus-visible{
 
 @supports (animation-timeline: view()){
   @media (prefers-reduced-motion: no-preference){
+
     .door,
     .rail-head > *,
     .rail-body > .lead,
-    .tags,
+    .tags li,
     .lane-name,
-    .rows .row,
+    .rows dt,
+    .rows dd,
     .dark-head,
     .dark-lead,
     .flow,
@@ -800,12 +816,44 @@ a:focus-visible, summary:focus-visible{
       animation-name:rise-in;
       animation-duration:auto;
       animation-delay:0s;
-      animation-timing-function:linear;
+      animation-timing-function:cubic-bezier(.16,.68,.3,1);
       animation-fill-mode:both;
       animation-timeline:view();
-      animation-range:entry 10% cover 48%;
+      animation-range:entry 10% cover 50%;
     }
 
+    /* Zweispaltiges setzt sich aus beiden Richtungen zusammen */
+    .rows dt,
+    .dark-rows .row:nth-child(odd),
+    .doors .door:first-child{animation-name:from-left;}
+
+    .rows dd,
+    .dark-rows .row:nth-child(even),
+    .doors .door:last-child{animation-name:from-right;}
+
+    /* Die Beschreibung trifft etwas spaeter ein als der Begriff */
+    .rows dd{animation-range:entry 16% cover 56%;}
+    .dark-rows .row:nth-child(even){animation-range:entry 16% cover 56%;}
+    .doors .door:last-child{animation-range:entry 16% cover 56%;}
+
+    /* Nebeneinanderliegendes laeuft nacheinander ein */
+    .steps li:nth-child(1){animation-range:entry 10% cover 46%;}
+    .steps li:nth-child(2){animation-range:entry 18% cover 54%;}
+    .steps li:nth-child(3){animation-range:entry 26% cover 62%;}
+    .steps li:nth-child(4){animation-range:entry 34% cover 70%;}
+
+    .tags li{animation-name:from-left;}
+    .tags li:nth-child(1){animation-range:entry 10% cover 40%;}
+    .tags li:nth-child(2){animation-range:entry 14% cover 44%;}
+    .tags li:nth-child(3){animation-range:entry 18% cover 48%;}
+    .tags li:nth-child(4){animation-range:entry 22% cover 52%;}
+    .tags li:nth-child(5){animation-range:entry 26% cover 56%;}
+    .tags li:nth-child(6){animation-range:entry 30% cover 60%;}
+    .tags li:nth-child(7){animation-range:entry 34% cover 64%;}
+
+    .reach a:nth-child(2){animation-range:entry 18% cover 58%;}
+
+    /* Schaltbild: Linie laeuft durch, Stationen setzen sich danach */
     .flow{view-timeline-name:--flowline;}
     .flow-rail--draw,
     .flow-stop{
@@ -819,10 +867,25 @@ a:focus-visible, summary:focus-visible{
       animation-name:flow-draw;
       animation-range:entry 14% cover 62%;
     }
-    .flow-stop{animation-name:rise-stop;}
+    .flow-stop{
+      animation-name:rise-stop;
+      animation-timing-function:cubic-bezier(.16,.68,.3,1);
+    }
     .flow-stop:nth-of-type(1){animation-range:entry 20% cover 34%;}
     .flow-stop:nth-of-type(2){animation-range:entry 30% cover 44%;}
     .flow-stop:nth-of-type(3){animation-range:entry 40% cover 54%;}
     .flow-stop:nth-of-type(4){animation-range:entry 50% cover 64%;}
+
+    /* Einspaltig ergibt seitliches Einfliegen keinen Sinn mehr */
+    @media (max-width: 860px){
+      .rows dt,
+      .rows dd,
+      .tags li,
+      .dark-rows .row,
+      .doors .door{
+        animation-name:rise-in;
+        animation-range:entry 10% cover 50%;
+      }
+    }
   }
 }
