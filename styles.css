@@ -198,16 +198,18 @@ header{
 .mark{
   display:flex;
   align-items:center;
-  gap:12px;
-  font-family:'Bricolage Grotesque', sans-serif;
-  font-weight:700;
-  font-size:1.55rem;
-  letter-spacing:-0.03em;
-  color:var(--petrol);
+  gap:13px;
 }
-.mark svg{
+.mark > svg{
   width:34px;
   height:34px;
+  flex:none;
+}
+.wordmark{
+  display:block;
+  height:21px;
+  width:auto;
+  flex:none;
 }
 .claim{
   margin-right:auto;
@@ -752,8 +754,9 @@ a:focus-visible, summary:focus-visible{
 }
 
 @media (max-width: 560px){
-  .mark{font-size:1.3rem;gap:9px;}
-  .mark svg{width:28px;height:28px;}
+  .mark{gap:10px;}
+  .mark > svg{width:28px;height:28px;}
+  .wordmark{height:18px;}
   .proof{grid-template-columns:1fr;}
   .proof li + li{padding-left:0;border-left:none;}
   .foot{flex-direction:column;align-items:flex-start;gap:12px;}
