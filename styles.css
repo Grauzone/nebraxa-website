@@ -748,12 +748,19 @@ a:focus-visible, summary:focus-visible{
    bleibt jedes Element sichtbar. */
 
 @keyframes rise-in{
-  from{opacity:0;transform:translateY(20px);}
+  from{opacity:0;transform:translateY(52px);}
   to{opacity:1;transform:none;}
 }
 @keyframes fade-in{
   from{opacity:0;}
   to{opacity:1;}
+}
+/* fill-box haelt den Ursprung pro Station, sonst skaliert das
+   ganze SVG aus seinem Koordinatenursprung heraus. */
+.flow-stop{transform-box:fill-box;transform-origin:center;}
+@keyframes rise-stop{
+  from{opacity:0;transform:scale(0.72);}
+  to{opacity:1;transform:scale(1);}
 }
 
 @media (prefers-reduced-motion: no-preference){
@@ -761,15 +768,15 @@ a:focus-visible, summary:focus-visible{
   .opening-lead,
   .opening-act,
   .proof li{
-    animation:rise-in 0.7s cubic-bezier(.22,.61,.36,1) both;
+    animation:rise-in 0.9s cubic-bezier(.16,.68,.3,1) both;
   }
-  .opening h1{animation-delay:0.04s;}
-  .opening-lead{animation-delay:0.15s;}
-  .opening-act{animation-delay:0.25s;}
-  .proof li:nth-child(1){animation-delay:0.36s;}
-  .proof li:nth-child(2){animation-delay:0.42s;}
-  .proof li:nth-child(3){animation-delay:0.48s;}
-  .proof li:nth-child(4){animation-delay:0.54s;}
+  .opening h1{animation-delay:0.06s;}
+  .opening-lead{animation-delay:0.24s;}
+  .opening-act{animation-delay:0.40s;}
+  .proof li:nth-child(1){animation-delay:0.56s;}
+  .proof li:nth-child(2){animation-delay:0.66s;}
+  .proof li:nth-child(3){animation-delay:0.76s;}
+  .proof li:nth-child(4){animation-delay:0.86s;}
 }
 
 @supports (animation-timeline: view()){
@@ -796,7 +803,7 @@ a:focus-visible, summary:focus-visible{
       animation-timing-function:linear;
       animation-fill-mode:both;
       animation-timeline:view();
-      animation-range:entry 4% cover 26%;
+      animation-range:entry 10% cover 48%;
     }
 
     .flow{view-timeline-name:--flowline;}
@@ -810,12 +817,12 @@ a:focus-visible, summary:focus-visible{
     }
     .flow-rail--draw{
       animation-name:flow-draw;
-      animation-range:entry 18% cover 46%;
+      animation-range:entry 14% cover 62%;
     }
-    .flow-stop{animation-name:fade-in;}
-    .flow-stop:nth-of-type(1){animation-range:entry 24% cover 38%;}
+    .flow-stop{animation-name:rise-stop;}
+    .flow-stop:nth-of-type(1){animation-range:entry 20% cover 34%;}
     .flow-stop:nth-of-type(2){animation-range:entry 30% cover 44%;}
-    .flow-stop:nth-of-type(3){animation-range:entry 36% cover 50%;}
-    .flow-stop:nth-of-type(4){animation-range:entry 42% cover 56%;}
+    .flow-stop:nth-of-type(3){animation-range:entry 40% cover 54%;}
+    .flow-stop:nth-of-type(4){animation-range:entry 50% cover 64%;}
   }
 }
