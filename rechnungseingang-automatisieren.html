@@ -121,7 +121,7 @@
     <p class="updated">Vladimir Mikulicic · 2. Oktober 2026</p>
 
     <div class="legal-body">
-      <p>Eine Eingangsrechnung zu bearbeiten dauert nur ein paar Minuten. Öffnen, Betrag und Fälligkeit abtippen, prüfen, ob die Leistung wirklich erbracht wurde, ablegen, an die Buchhaltung weitergeben, Zahlung vormerken. Bei fünf Rechnungen im Monat fällt das kaum auf. Bei fünfzig ist es ein halber Arbeitstag, der jeden Monat wiederkommt – und meistens am Freitagnachmittag erledigt wird.</p>
+      <p>Eine Eingangsrechnung zu bearbeiten dauert nur ein paar Minuten. Öffnen, Betrag und Fälligkeit abtippen, prüfen, ob die Leistung wirklich erbracht wurde, ablegen, an die Buchhaltung weitergeben, Zahlung vormerken. Bei fünf Rechnungen im Monat fällt das kaum auf. Bei fünfzig sind es rund fünf Stunden, die jeden Monat wiederkommen – und meistens am Freitagnachmittag erledigt wird.</p>
       <p>Genau diese Art Arbeit lässt sich gut automatisieren: Sie wiederholt sich, folgt festen Regeln, und die Daten liegen bereits digital vor. Dieser Artikel zeigt, welche Schritte eine Automatisierung übernehmen kann, welche bei Ihnen bleiben sollten und wie Sie abschätzen, ob es sich für Ihren Betrieb lohnt.</p>
 
       <h2>Wie der Rechnungseingang heute meist läuft</h2>
@@ -129,7 +129,7 @@
       <ul>
         <li>Die Rechnung kommt als PDF per E-Mail, manchmal auf Papier, manchmal als Link in ein Lieferantenportal.</li>
         <li>Jemand öffnet sie, liest Absender, Rechnungsnummer, Betrag und Zahlungsziel ab und trägt sie in eine Liste oder direkt in die Buchhaltungssoftware ein.</li>
-        <li>Die Rechnung wird mit Bestellung oder Lieferschein abgeglichen, oft aus dem Gedächtnis.</li>
+        <li>Wenn eine Bestellung oder ein Lieferschein vorliegt, wird die Rechnung damit abgeglichen, oft aus dem Gedächtnis.</li>
         <li>Das PDF wird in einem Ordner abgelegt oder an den Steuerberater weitergeleitet.</li>
         <li>Die Zahlung wird vorgemerkt – oder vergessen, bis die Mahnung kommt.</li>
       </ul>
@@ -141,7 +141,7 @@
       <h3>Daten auslesen</h3>
       <p>Absender, Rechnungsnummer, Rechnungsdatum, Netto- und Bruttobetrag, Steuersatz, Zahlungsziel und Bankverbindung werden aus dem Dokument gelesen. Bei E-Rechnungen im Format XRechnung oder ZUGFeRD stehen diese Daten maschinenlesbar in der Datei, bei normalen PDFs und Fotos übernimmt eine Texterkennung mit KI-Unterstützung. Das funktioniert bei gängigen Rechnungslayouts zuverlässig, aber nicht fehlerfrei – deshalb gibt es den nächsten Schritt.</p>
       <h3>Prüfen</h3>
-      <p>Der Workflow gleicht ab, was sich regelbasiert prüfen lässt: Ist der Lieferant bekannt? Wurde diese Rechnungsnummer schon einmal erfasst? Passt der Betrag zur Bestellung? Und besonders wichtig: Hat sich die Bankverbindung gegenüber früheren Rechnungen geändert? Gefälschte Rechnungen mit ausgetauschter IBAN sind eine verbreitete Betrugsmasche, und genau diese Abweichung fällt beim schnellen Abtippen am leichtesten durch.</p>
+      <p>Der Workflow gleicht ab, was sich regelbasiert prüfen lässt: Ist der Lieferant bekannt? Wurde diese Rechnungsnummer schon einmal erfasst? Passt der Betrag zur Bestellung, wenn eine vorliegt? Und besonders wichtig: Hat sich die Bankverbindung gegenüber früheren Rechnungen geändert? Gefälschte Rechnungen mit ausgetauschter IBAN sind eine verbreitete Betrugsmasche, und genau diese Abweichung fällt beim schnellen Abtippen am leichtesten durch.</p>
       <h3>Freigabe durch Sie</h3>
       <p>Sie sehen die erkannten Daten neben dem Original und bestätigen mit einem Klick, korrigieren ein Feld oder lehnen ab. Auffälligkeiten aus der Prüfung sind markiert. Das ist die einzige Stelle, an der noch jemand entscheidet – und so sollte es auch bleiben.</p>
       <h3>Übergabe und Ablage</h3>
@@ -158,8 +158,8 @@
       <p>Umgekehrt gilt: Bei zehn Rechnungen im Monat bleibt die Ersparnis klein. Dann lohnt sich eine Automatisierung meist erst, wenn sie mit anderen Abläufen zusammenkommt, etwa dem Sortieren des gesamten Posteingangs.</p>
 
       <h2>Die E-Rechnung macht es einfacher</h2>
-      <p>Seit dem 1. Januar 2025 müssen alle Unternehmen in Deutschland E-Rechnungen von anderen Unternehmen empfangen können. Ab 2027 müssen Unternehmen mit mehr als 800.000 Euro Vorjahresumsatz E-Rechnungen auch ausstellen, ab 2028 alle anderen ebenfalls; Kleinunternehmer sind vom Ausstellen ausgenommen, vom Empfangen nicht. Eine E-Rechnung ist kein PDF, sondern ein strukturierter Datensatz nach der europäischen Norm EN 16931, in Deutschland meist als XRechnung oder ZUGFeRD.</p>
-      <p>Für die Automatisierung ist das ein Vorteil: Die Daten müssen nicht mehr aus einem Bild gelesen werden, sie stehen eindeutig in der Datei. Je mehr Ihrer Lieferanten auf E-Rechnung umstellen, desto zuverlässiger und günstiger wird der automatische Rechnungseingang. Ein Workflow, der heute gebaut wird, sollte beide Wege können: PDFs und Fotos auslesen und E-Rechnungen direkt verarbeiten.</p>
+      <p>Seit dem 1. Januar 2025 müssen alle Unternehmen in Deutschland E-Rechnungen von anderen Unternehmen empfangen können. Ab 2027 müssen Unternehmen mit mehr als 800.000 Euro Vorjahresumsatz E-Rechnungen auch ausstellen, ab 2028 alle anderen ebenfalls; Kleinunternehmer sind vom Ausstellen ausgenommen, vom Empfangen nicht. Eine E-Rechnung enthält einen strukturierten Datensatz nach der europäischen Norm EN 16931. Bei der XRechnung ist das eine reine XML-Datei, bei ZUGFeRD ein PDF/A-3 mit eingebetteter XML-Datei. Ein gewöhnliches PDF ohne diesen Datensatz gilt nicht als E-Rechnung.</p>
+      <p>Für die Automatisierung ist das ein Vorteil: Die Daten müssen nicht mehr aus einem Bild gelesen werden, sie stehen eindeutig im XML-Datensatz. Je mehr Ihrer Lieferanten auf E-Rechnung umstellen, desto zuverlässiger und günstiger wird der automatische Rechnungseingang. Ein Workflow, der heute gebaut wird, sollte beide Wege können: gewöhnliche PDFs und Fotos auslesen und E-Rechnungen direkt verarbeiten.</p>
 
       <h2>Was Handarbeit bleiben sollte</h2>
       <ul>
@@ -170,7 +170,7 @@
 
       <h2>Datenschutz und Aufbewahrung</h2>
       <p>Rechnungen enthalten Namen, Adressen und Bankverbindungen. Wer sie automatisch verarbeitet, sollte darauf achten, dass Dokumente bei Anbietern in der EU verarbeitet und nicht zum Training von KI-Modellen verwendet werden, und mit jedem Dienstleister einen Auftragsverarbeitungsvertrag nach Art. 28 DSGVO schließen.</p>
-      <p>Für die Ablage gelten die GoBD: Belege müssen unveränderbar und auffindbar archiviert werden, Buchungsbelege seit 2025 acht Jahre lang. Ein guter Workflow legt das Original unverändert ab und protokolliert jeden Durchlauf, also was eingegangen ist, was erkannt wurde und wer freigegeben hat. Ob Ihre Ablage den GoBD genügt, klären Sie im Zweifel mit Ihrem Steuerberater.</p>
+      <p>Für die Ablage gelten die GoBD: Belege müssen unveränderbar und auffindbar archiviert werden, Buchungsbelege seit 2025 acht Jahre lang. Bei E-Rechnungen ist der strukturierte Datensatz im Original maßgeblich: Aufzubewahren ist die XML-Datei bzw. das vollständige ZUGFeRD-PDF, eine Sichtdarstellung oder ein Ausdruck reicht nicht. Ein guter Workflow legt das Original unverändert ab und protokolliert jeden Durchlauf, also was eingegangen ist, was erkannt wurde und wer freigegeben hat. Ob Ihre Ablage den GoBD genügt, klären Sie im Zweifel mit Ihrem Steuerberater.</p>
 
       <h2>Lohnt es sich für Ihren Betrieb?</h2>
       <p>Drei Fragen geben eine erste Antwort:</p>
@@ -179,7 +179,7 @@
         <li>Kommen die meisten per E-Mail, oder überwiegt noch Papier?</li>
         <li>Welche Buchhaltungssoftware nutzen Sie, oder läuft alles über den Steuerberater?</li>
       </ul>
-      <p>Wenn Sie diese Fragen beantworten können, lässt sich in einem kurzen Gespräch abschätzen, was eine Automatisierung kosten würde und was sie Ihnen spart. Manchmal ist die Antwort auch, dass sich der Aufwand bei Ihrem Volumen nicht lohnt – das sagen wir dann ebenso.</p>
+      <p>Wenn Sie diese Fragen beantworten können, lässt sich in einem kurzen Gespräch abschätzen, was eine Automatisierung kosten würde und was sie Ihnen spart. Manchmal ist die ehrliche Antwort auch, dass sich der Aufwand bei Ihrem Volumen nicht lohnt.</p>
       <p>Mehr dazu, welche Abläufe sich außer dem Rechnungseingang automatisieren lassen, finden Sie unter <a href="ki-automatisierung.html">KI-Automatisierung</a>.</p>
     </div>
   </div>
