@@ -680,6 +680,7 @@ a:focus-visible, summary:focus-visible{
   max-width:16ch;
   margin-bottom:14px;
 }
+article.legal h1{max-width:26ch;}
 .legal .updated{
   color:var(--slate);
   font-size:0.93rem;
