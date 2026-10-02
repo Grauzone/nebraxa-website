@@ -541,6 +541,7 @@ header{
   grid-template-columns:repeat(4,1fr);
   gap:clamp(24px,3vw,42px);
 }
+.steps + p{margin-top:clamp(32px,4vw,48px);}
 .steps li{
   padding-top:20px;
   border-top:2px solid var(--petrol);
@@ -693,7 +694,7 @@ a:focus-visible, summary:focus-visible{
 }
 .legal-body h3{font-size:1.05rem;margin:26px 0 8px;}
 .legal-body p, .legal-body li{color:var(--slate);}
-.legal-body p + p{margin-top:14px;}
+.legal-body p + p, .legal-body ul + p{margin-top:14px;}
 .legal-body ul{
   list-style:disc;
   padding-left:22px;
