@@ -403,7 +403,7 @@ header{
 .block, .doors-band, .dark, .closing{overflow-x:clip;}
 .block{padding-block:var(--pad);}
 .block--tint{background:var(--mist-soft);}
-.block--flush{padding-top:0;}
+.block--flush, .legal + .block{padding-top:0;}
 
 .rail{
   display:grid;
