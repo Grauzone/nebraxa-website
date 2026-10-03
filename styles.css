@@ -221,7 +221,8 @@ header{
 }
 .bar-nav{
   display:flex;
-  gap:30px;
+  gap:24px;
+  white-space:nowrap;
   font-size:0.96rem;
   color:var(--slate);
 }
@@ -350,8 +351,8 @@ header{
 }
 /* Innenabstand nur zwischen den beiden Tueren, damit der Text
    buendig mit der uebrigen Mittelspalte beginnt. */
-.door:first-child{padding-right:clamp(26px,3.5vw,48px);}
-.door + .door{
+.doors > .door:nth-child(odd){padding-right:clamp(26px,3.5vw,48px);}
+.doors > .door:nth-child(even){
   border-left:1px solid var(--line);
   padding-left:clamp(26px,3.5vw,48px);
 }
@@ -364,6 +365,15 @@ header{
   font-size:clamp(1.5rem,2.5vw,2.05rem);
   letter-spacing:-0.025em;
   color:var(--petrol);
+}
+.door-meta{
+  display:block;
+  margin-bottom:12px;
+  font-size:0.8rem;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--slate);
 }
 .door-text{
   display:block;
@@ -381,6 +391,9 @@ header{
   border-bottom:2px solid var(--sun);
   padding-bottom:3px;
 }
+
+.doors + p{margin-top:clamp(28px,3.5vw,40px);}
+.rows + .door, .steps + .door{margin-top:clamp(28px,3.5vw,40px);}
 
 /* ---------- Abschnitte mit Schiene ---------- */
 /* Faengt das seitliche Einfliegen ab. Auf Abschnittsebene, nicht
@@ -724,8 +737,11 @@ article.legal h1{max-width:26ch;}
 }
 
 /* ---------- Schmale Viewports ---------- */
-@media (max-width: 1040px){
+@media (max-width: 1240px){
   .claim{display:none;}
+}
+
+@media (max-width: 1040px){
   .proof{grid-template-columns:1fr 1fr;}
   .proof li:nth-child(3){padding-left:0;border-left:none;}
   .dark-rows{grid-template-columns:1fr;}
@@ -742,8 +758,8 @@ article.legal h1{max-width:26ch;}
   .rail-head{position:static;}
   .rail-note{max-width:60ch;}
   .doors{grid-template-columns:1fr;}
-  .door:first-child{padding-right:0;}
-  .door + .door{border-left:none;padding-left:0;border-top:3px solid var(--petrol);}
+  .doors > .door:nth-child(odd){padding-right:0;}
+  .doors > .door:nth-child(even){border-left:none;padding-left:0;}
   .rows .row{grid-template-columns:1fr;gap:8px;}
   .steps{grid-template-columns:1fr;gap:22px;}
   .step-no{font-size:2rem;margin-bottom:10px;}
