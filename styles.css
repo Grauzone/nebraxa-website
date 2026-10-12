@@ -722,6 +722,14 @@ a:focus-visible, summary:focus-visible{
 }
 .check .wide-head{max-width:22ch;margin-bottom:20px;}
 .check-act{margin-top:clamp(28px,3.5vw,40px);}
+.check-cover{
+  display:block;
+  width:100%;
+  height:auto;
+  margin-bottom:clamp(28px,4vw,44px);
+  border:1px solid var(--hair);
+  border-radius:16px;
+}
 
 @media (max-width: 560px){
   .sticker{padding:10px 14px 9px;border-radius:14px;}
@@ -768,6 +776,25 @@ article.legal h1{max-width:26ch;}
   color:var(--petrol);
   font-weight:500;
   border-bottom:2px solid var(--sun);
+}
+.legal-body blockquote{
+  margin:26px 0;
+  padding:4px 0 4px 22px;
+  border-left:3px solid var(--petrol);
+}
+.legal-body blockquote p{
+  color:var(--ink);
+  font-family:'Bricolage Grotesque', sans-serif;
+  font-weight:600;
+  font-size:1.12rem;
+  line-height:1.45;
+}
+.legal-body blockquote .quote-src{
+  margin-top:8px;
+  font-family:inherit;
+  font-weight:400;
+  font-size:0.9rem;
+  color:var(--slate);
 }
 .legal-body address{
   font-style:normal;
