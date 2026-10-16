@@ -869,7 +869,7 @@ article.legal h1{max-width:26ch;}
    jedem weiteren Durchgang passiert nichts mehr. */
 
 @keyframes rise-in{
-  from{opacity:0;transform:translateY(56px);}
+  from{opacity:0;transform:translateY(20px);}
   to{opacity:1;transform:none;}
 }
 
@@ -881,7 +881,7 @@ article.legal h1{max-width:26ch;}
   .opening-lead,
   .opening-act,
   .proof li{
-    animation:rise-in 0.9s cubic-bezier(.16,.68,.3,1) both;
+    animation:rise-in 0.7s cubic-bezier(.16,.68,.3,1) both;
   }
   .opening h1{animation-delay:0.06s;}
   .opening-lead{animation-delay:0.24s;}
@@ -898,9 +898,9 @@ html.js-reveal :is(.door, .rail-head > *, .rail-body > .lead, .tags li,
   .dark-rows .row, .wide-head, .steps li, .faq details, .closing h2,
   .closing .lead, .reach a){
   opacity:0;
-  transform:translateY(56px);
-  transition:opacity 0.85s cubic-bezier(.16,.68,.3,1),
-             transform 0.85s cubic-bezier(.16,.68,.3,1);
+  transform:translateY(20px);
+  transition:opacity 0.7s cubic-bezier(.16,.68,.3,1),
+             transform 0.7s cubic-bezier(.16,.68,.3,1);
 }
 html.js-reveal :is(.door, .rail-head > *, .rail-body > .lead, .tags li,
   .lane-name, .rows dt, .rows dd, .dark-head, .dark-lead, .flow,
@@ -913,10 +913,10 @@ html.js-reveal :is(.door, .rail-head > *, .rail-body > .lead, .tags li,
 /* Zweispaltiges setzt sich aus beiden Richtungen zusammen.
    Die :is()-Huelle haelt die Spezifitaet auf Hoehe der Grundregel. */
 html.js-reveal :is(.rows dt, .dark-rows .row:nth-child(odd),
-  .doors .door:first-child, .tags li){transform:translateX(-150px);}
+  .doors .door:first-child, .tags li){transform:translateX(-40px);}
 
 html.js-reveal :is(.rows dd, .dark-rows .row:nth-child(even),
-  .doors .door:last-child){transform:translateX(150px);}
+  .doors .door:last-child){transform:translateX(40px);}
 
 html.js-reveal :is(.rows dt, .rows dd, .dark-rows .row,
   .doors .door, .tags li).is-in{transform:none;}
@@ -949,8 +949,8 @@ html.js-reveal .flow.is-in .flow-rail--draw{stroke-dashoffset:0;}
 
 html.js-reveal .flow-stop{
   opacity:0;
-  transform:scale(0.7);
-  transition:opacity 0.5s ease-out, transform 0.5s cubic-bezier(.2,.9,.3,1.25);
+  transform:scale(0.9);
+  transition:opacity 0.5s ease-out, transform 0.5s cubic-bezier(.2,.9,.3,1.05);
 }
 html.js-reveal .flow.is-in .flow-stop{opacity:1;transform:none;}
 html.js-reveal .flow.is-in .flow-stop:nth-of-type(1){transition-delay:0.30s;}
@@ -961,7 +961,7 @@ html.js-reveal .flow.is-in .flow-stop:nth-of-type(4){transition-delay:1.26s;}
 /* Einspaltig ergibt seitliches Einfliegen keinen Sinn mehr */
 @media (max-width: 860px){
   html.js-reveal :is(.rows dt, .rows dd, .tags li, .dark-rows .row,
-    .doors .door){transform:translateY(44px);}
+    .doors .door){transform:translateY(16px);}
   html.js-reveal :is(.rows dt, .rows dd, .tags li, .dark-rows .row,
     .doors .door).is-in{transform:none;}
 }
