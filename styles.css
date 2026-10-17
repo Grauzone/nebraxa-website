@@ -287,7 +287,7 @@ header{
   max-height:900px;
   object-fit:cover;
   object-position:50% 10%;
-  margin-top:calc(clamp(120px,16vw,280px) * -1);
+  margin-top:calc((clamp(120px,16vw,280px) + 30px) * -1);
   -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 86%,transparent 100%);
   mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 86%,transparent 100%);
 }
