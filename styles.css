@@ -880,6 +880,9 @@ article.legal h1{max-width:26ch;}
     -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 30%,#000 85%,transparent 100%);
     mask-image:linear-gradient(to bottom,transparent 0%,#000 30%,#000 85%,transparent 100%);
   }
+  .opening-act{flex-direction:column;align-items:stretch;gap:12px;}
+  .opening-act > a{text-align:center;padding:16px 30px;border-radius:999px;}
+  .opening-act .lnk{padding:14px 30px;border:2px solid var(--petrol);background:var(--paper);font-weight:600;}
   .proof{grid-template-columns:1fr;}
   .proof li + li{padding-left:0;border-left:none;}
   .foot{flex-direction:column;align-items:flex-start;gap:12px;}
