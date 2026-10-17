@@ -442,6 +442,10 @@ header{
   font-size:0.97rem;
   max-width:40ch;
 }
+.portrait{
+  display:block;width:100%;max-width:320px;height:auto;
+  margin-top:32px;border-radius:16px;
+}
 
 .tags{
   display:flex;
@@ -849,6 +853,7 @@ article.legal h1{max-width:26ch;}
   .rail{grid-template-columns:1fr;gap:30px;}
   .rail-head{position:static;}
   .rail-note{max-width:60ch;}
+  .portrait{max-width:280px;margin-top:24px;}
   .doors{grid-template-columns:1fr;}
   .doors > .door:nth-child(odd){padding-right:0;}
   .doors > .door:nth-child(even){border-left:none;padding-left:0;}
