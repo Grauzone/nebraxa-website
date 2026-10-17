@@ -278,18 +278,21 @@ header{
 .opening > .shell:first-child{position:relative;z-index:1;}
 /* Das Bild rutscht unter den unteren Teil des Auftakts und blendet nach
    oben und unten in den Seitenhintergrund aus. Der Himmel liegt dort, wo die
-   Buttons stehen, deshalb bleibt der Text lesbar. */
+   Buttons stehen, deshalb bleibt der Text lesbar. Unter der Tischkante
+   ist das Motiv dunkel und schimmert im Verlauf grau durch, deshalb
+   schneidet object-position die unteren 180 von 1024 Bildpixeln immer ab
+   (11.7vw bei Bildbreite = Viewportbreite). */
 .opening-band{
   display:block;
   width:100%;
   height:auto;
-  aspect-ratio:1536/850;
+  aspect-ratio:1536/845;
   max-height:900px;
   object-fit:cover;
-  object-position:50% 25%;
+  object-position:left 0 bottom -11.7vw;
   margin-top:calc((clamp(120px,16vw,280px) + 30px) * -1);
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 94%,transparent 100%);
-  mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 94%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 calc(100% - 8vw),rgba(0,0,0,.75) calc(100% - 5vw),rgba(0,0,0,.35) calc(100% - 2.5vw),transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 42%,#000 calc(100% - 8vw),rgba(0,0,0,.75) calc(100% - 5vw),rgba(0,0,0,.35) calc(100% - 2.5vw),transparent 100%);
 }
 .opening h1{
   font-size:clamp(2.4rem,5.4vw,4.1rem);
