@@ -275,18 +275,15 @@ header{
 
 /* ---------- Auftakt ---------- */
 .opening{padding:clamp(60px,9vw,104px) 0 clamp(56px,7vw,84px);}
-.opening-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 420px;
-  gap:clamp(40px,5vw,72px);
-  align-items:center;
-}
-.opening-pic{
+.opening-band{
+  display:block;
   width:100%;
   height:auto;
-  aspect-ratio:4/5;
+  aspect-ratio:21/9;
+  max-height:680px;
   object-fit:cover;
-  border-radius:16px;
+  object-position:50% 42%;
+  margin-top:clamp(48px,7vw,80px);
 }
 .opening h1{
   font-size:clamp(2.4rem,5.4vw,4.1rem);
@@ -828,8 +825,6 @@ article.legal h1{max-width:26ch;}
 }
 
 @media (max-width: 1040px){
-  .opening-grid{grid-template-columns:1fr;}
-  .opening-pic{aspect-ratio:16/10;object-position:50% 55%;max-width:720px;}
   .proof{grid-template-columns:1fr 1fr;}
   .proof li:nth-child(3){padding-left:0;border-left:none;}
   .dark-rows{grid-template-columns:1fr;}
@@ -864,6 +859,7 @@ article.legal h1{max-width:26ch;}
   .mark{gap:10px;}
   .mark > svg{width:28px;height:28px;}
   .wordmark{height:21px;}
+  .opening-band{aspect-ratio:16/9;object-position:60% 25%;}
   .proof{grid-template-columns:1fr;}
   .proof li + li{padding-left:0;border-left:none;}
   .foot{flex-direction:column;align-items:flex-start;gap:12px;}
@@ -895,12 +891,12 @@ article.legal h1{max-width:26ch;}
   .opening h1,
   .opening-lead,
   .opening-act,
-  .opening-pic,
+  .opening-band,
   .proof li{
     animation:rise-in 0.7s cubic-bezier(.16,.68,.3,1) both;
   }
   .opening h1{animation-delay:0.06s;}
-  .opening-pic{animation-delay:0.16s;}
+  .opening-band{animation-delay:0.48s;}
   .opening-lead{animation-delay:0.24s;}
   .opening-act{animation-delay:0.40s;}
   .proof li:nth-child(1){animation-delay:0.56s;}
